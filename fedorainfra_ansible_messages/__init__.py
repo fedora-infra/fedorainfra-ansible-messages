@@ -14,4 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-from .thing import NewThingV1  # noqa: F401
+from .ansible_messages import (  # noqa: F401
+    AnsiblePlaybookStartV1,
+    AnsiblePlaybookCompleteV1,
+)
