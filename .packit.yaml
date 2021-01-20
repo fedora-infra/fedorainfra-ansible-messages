@@ -1,0 +1,20 @@
+# See the documentation for more information:
+# https://packit.dev/docs/configuration/
+
+specfile_path: fedora/python-fedorainfra-ansible-messages.spec
+
+# add or remove files that should be synced
+synced_files:
+    - python-fedorainfra-ansible-messages.spec
+    - .packit.yaml
+
+# name in upstream package repository/registry (e.g. in PyPI)
+upstream_package_name: fedorainfra-ansible-messages
+# downstream (Fedora) RPM package name
+downstream_package_name: python-fedorainfra-ansible-messages
+
+actions:
+  create-archive:
+    - python3 setup.py sdist --dist-dir ./fedora/
+    - bash -c "ls -1t ./fedora/*.tar.gz | head -n 1"
+  get-current-version: python3 setup.py --version
