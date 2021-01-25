@@ -17,3 +17,24 @@ actions:
     - python3 setup.py sdist --dist-dir ./fedora/
     - bash -c "ls -1t ./fedora/*.tar.gz | head -n 1"
   get-current-version: python3 setup.py --version
+jobs:
+  - job: copr_build
+    trigger: pull_request
+    metadata:
+      targets:
+        - epel-8
+  - job: tests
+    trigger: pull_request
+    metadata:
+      targets:
+        - epel-8
+  - job: copr_build
+    trigger: commit
+    metadata:
+      branch: master
+      targets:
+        - epel-8
+      project: wip-fedorainfra-ansible-messages
+      list_on_homepage: False
+      preserve_project: False
+
