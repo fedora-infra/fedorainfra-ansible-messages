@@ -34,7 +34,7 @@ jobs:
       branch: master
       targets:
         - epel-8
-      project: wip-fedorainfra-ansible-messages
+      project: fedorainfra-ansible-messages-master
       list_on_homepage: False
       preserve_project: False
 
