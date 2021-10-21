@@ -1,1 +1,6 @@
 include LICENSE tox.ini
+include README.md
+recursive-include  fedora *.spec	
+recursive-include  *.py *.txt
+recursive-include fedorainfra_ansible_messages *.py *.conf	
+recursive-excludes *.pyc
