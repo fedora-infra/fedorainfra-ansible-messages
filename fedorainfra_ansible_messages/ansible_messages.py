@@ -13,6 +13,7 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+import warnings
 
 from fedora_messaging import message
 from fedora_messaging.schema_utils import user_avatar_url
@@ -37,15 +38,24 @@ class ansibleMessage(message.Message):
 
     @property
     def agent(self):
+        warnings.warn(
+            "agent property is deprecated, please use agent_name instead",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return self.agent_name
+
+    @property
+    def agent_name(self):
         return self.body.get("userid")
 
     @property
     def agent_avatar(self):
-        return user_avatar_url(self.agent)
+        return user_avatar_url(self.agent_name)
 
     @property
     def usernames(self):
-        return [self.agent]
+        return [self.agent_name]
 
 
 class AnsiblePlaybookStartV1(ansibleMessage):
