@@ -55,13 +55,22 @@ def test_ansible_messages_properties():
 
     assert message.app_name == "ansible"
     assert message.app_icon == "https://apps.fedoraproject.org/img/icons/ansible.png"
-    assert message.agent == "dudemcpants"
+    assert message.agent_name == "dudemcpants"
     assert message.agent_avatar == (
         "https://seccdn.libravatar.org/avatar/"
         "caa750edf4a11206831a58713cf9231b5b3227765887cbc765d4f8c5c55576a5"
         "?s=64&d=retro"
     )
     assert message.usernames == ["dudemcpants"]
+
+    with pytest.warns(DeprecationWarning) as w:
+        assert message.agent == "dudemcpants"
+
+        assert len(w) == 1
+        assert (
+            w[0].message.args[0]
+            == "agent property is deprecated, please use agent_name instead"
+        )
 
 
 def test_playbook_start_v1():
